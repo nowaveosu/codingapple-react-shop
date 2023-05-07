@@ -14,18 +14,22 @@
 // data.js에서 export default 변수명 해서 내보내서
 // App.js에서 import 아무이름 from './data.js'해서 씀
 // export 여러개하려면 export {a,b}, import {a,b} from './data
-
+// 상품목록 컴포넌트화
+// 상품 안 데이터바인딩 잘해오기
+// 반복적인 부분은 map반복문 써보기
 
 import './App.css';
 import { Button, Nav, Navbar, Container} from 'react-bootstrap';
 import bg from './img/bg.png';
 import { useState } from 'react';
 import data from './data';
+import Cont from './Container'
 
 function App() {
 
   let [shoes] = useState(data)
-  console.log(shoes);
+  let arr1 = [0,1,2]
+
   return (
     <div className="App">
 
@@ -42,21 +46,7 @@ function App() {
       
       <div className='container'>
         <div className='row'>
-          <div className='col-md-4'>
-            <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="80%"/>
-            <h4>{shoes[0].title}</h4>
-            <p>{shoes[0].price}</p>
-          </div>
-          <div className='col-md-4'>
-            <img src="https://codingapple1.github.io/shop/shoes2.jpg" width="80%"/>
-            <h4>{shoes[1].title}</h4>
-            <p>{shoes[1].price}</p>
-          </div>
-          <div className='col-md-4'>
-            <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="80%"/>
-            <h4>{shoes[2].title}</h4>
-            <p>{shoes[2].price}</p>
-          </div>
+          <Cont src='https://codingapple1.github.io/shop/shoes.jpg' title={shoes[0].title} price={shoes[0].price}  / >
         </div>
       </div>
     </div>
