@@ -46,7 +46,12 @@ function App() {
       
       <div className='container'>
         <div className='row'>
-          <Cont src='https://codingapple1.github.io/shop/shoes.jpg' title={shoes[0].title} price={shoes[0].price}  / >
+          {
+            shoes.map((el) => {
+              return(
+                <Cont id = {el.id} title = {el.title} price = {el.price}></Cont>
+              );})
+          }
         </div>
       </div>
     </div>
