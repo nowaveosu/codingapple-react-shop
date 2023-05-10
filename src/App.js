@@ -21,14 +21,16 @@
 
 //* react-router-dom
 // index.js에서 BrowserRouter로 App.js를 감싸준다. 
-
+// navigate, nested routes 등 쓸수있음
+// Outlet쓰면 /about/members 중 멤버스가 들어갈자리를 정해줄수있음
+// 비슷한 페이지 여러개 필요하면 url파라미터
 import './App.css';
 import { Button, Nav, Navbar, Container} from 'react-bootstrap';
 import bg from './img/bg.png';
 import { useState } from 'react';
 import data from './data';
-import {Routes, Route, Link } from 'react-router-dom';
-import Detail from './Detail';
+import {Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import Detail from './routes/Detail';
 
 function Card(props){
   return (
@@ -43,7 +45,7 @@ function Card(props){
 function App() {
 
   let [shoes] = useState(data)
-  let arr1 = [0,1,2]
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -51,11 +53,12 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">밤무리상점</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
+
       <Routes>
         <Route path='/' element={
           <>
@@ -72,11 +75,18 @@ function App() {
             </div>
           </>
         }/>
-        <Route path='/detail' element={<Detail/>}/>
+        <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>
+        {/* <Route path='*' element={<div>없는 페이지입니다</div>}/>
+        <Route path='/about' element={<About/>}>
+          <Route path='member' element={<div>멤버임</div>}/>
+          <Route path='location' element={<About/>}/>  
+        </Route> */}
+
       </Routes>
 
     </div>
   );
 }
+
 
 export default App;
