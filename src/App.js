@@ -1,3 +1,4 @@
+/* eslint-disable */
 // * bootstrap
 // 상단바, 모달, 버튼 등 맘대로 갖다쓸수있음
 // index.html에 <link> 추가하거나 app.js에 import하면됨
@@ -18,12 +19,16 @@
 // 상품 안 데이터바인딩 잘해오기
 // 반복적인 부분은 map반복문 써보기
 
+//* react-router-dom
+// index.js에서 BrowserRouter로 App.js를 감싸준다. 
+
 import './App.css';
 import { Button, Nav, Navbar, Container} from 'react-bootstrap';
 import bg from './img/bg.png';
 import { useState } from 'react';
 import data from './data';
-
+import {Routes, Route, Link } from 'react-router-dom';
+import Detail from './Detail';
 
 function Card(props){
   return (
@@ -42,7 +47,6 @@ function App() {
 
   return (
     <div className="App">
-
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">밤무리상점</Navbar.Brand>
@@ -52,18 +56,25 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-      <div className='main-bg' style={{backgroundImage: 'url('+ bg +')'}}></div>
-      
-      <div className='container'>
-        <div className='row'>
-          {
-            shoes.map((el,i) => {
-              return(
-                <Card shoes={shoes[i]} i={i}></Card>
-              );})
-          }
-        </div>
-      </div>
+      <Routes>
+        <Route path='/' element={
+          <>
+            <div className='main-bg' style={{backgroundImage: 'url('+ bg +')'}}></div>
+            <div className='container'>
+              <div className='row'>
+                {
+                  shoes.map((el,i) => {
+                    return(
+                      <Card shoes={shoes[i]} i={i}></Card>
+                    );})
+                }
+              </div>
+            </div>
+          </>
+        }/>
+        <Route path='/detail' element={<Detail/>}/>
+      </Routes>
+
     </div>
   );
 }
