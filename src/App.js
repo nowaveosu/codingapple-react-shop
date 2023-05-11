@@ -24,6 +24,27 @@
 // navigate, nested routes 등 쓸수있음
 // Outlet쓰면 /about/members 중 멤버스가 들어갈자리를 정해줄수있음
 // 비슷한 페이지 여러개 필요하면 url파라미터
+
+//* css
+//한 컴포넌트에만 css 적용하고싶으면
+//컴포넌트명.module.css
+
+//* useEffect 
+// 컴포넌트의 Lifecycle
+// 페이지에 장착되기도하고 (mount)
+// 가끔 업데이트도 되고(update)
+// 필요없으면 제거되고 (unmount)
+// 실행할코드를 3가지중 하나에 갈고리를 달아놓을수 있음
+// usEffect로 할수있음
+// mount, update(재렌더링)될때마다 useEffect내 코드를 실행해줌
+// useEffect 안에 있는 코드는 html렌더링 후에 동작해서
+// 오래걸리는 연산, 서버에서 데이터 가져오는 작업등을 넣으면 되겠다.
+// 동적인 ui는 직접 다루는게 아니라. 그걸 다루는 스위치(state)를 만들어서 삼항연산자를 활용
+// useEffect 두번째인자는 []안에 있는 변수가 변할때마다 1번째 함수가 실행이됨 
+// 빈배열로 두면 맨처음에만 실행되고, 빈배열 없으면 맨처음(mount)에만 실행됨
+// useEffect () => { return()=>{여기는 기존코드제거코드}}
+
+
 import './App.css';
 import { Button, Nav, Navbar, Container} from 'react-bootstrap';
 import bg from './img/bg.png';
