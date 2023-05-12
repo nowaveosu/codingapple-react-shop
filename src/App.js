@@ -44,6 +44,15 @@
 // 빈배열로 두면 맨처음에만 실행되고, 빈배열 없으면 맨처음(mount)에만 실행됨
 // useEffect () => { return()=>{여기는 기존코드제거코드}}
 
+//* ajax
+// 서버에 데이터 요청 하는법
+// 서버 : 데이터 요청하면 데이터 보내주는 프로그램
+// 요청방법(GET/POST , URL)
+// 요청결과는 .then((result)=>{})
+// axios.post('url',{name: 'kim'})
+// 동시에 url여러개에 요청
+// Promise.all([axios.get(),axios.get()])
+
 
 import './App.css';
 import { Button, Nav, Navbar, Container} from 'react-bootstrap';
@@ -52,6 +61,7 @@ import { useState } from 'react';
 import data from './data';
 import {Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail';
+import axios from 'axios';
 
 function Card(props){
   return (
@@ -65,7 +75,7 @@ function Card(props){
 
 function App() {
 
-  let [shoes] = useState(data)
+  let [shoes,setShoes] = useState(data)
   let navigate = useNavigate();
 
   return (
@@ -94,15 +104,20 @@ function App() {
                 }
               </div>
             </div>
+            <button onClick={()=>{
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+                .then((result)=>{
+                  console.log(result.data)
+                  setShoes([...shoes,...result.data])
+                })
+                .catch(()=>{
+                  console.log('실패함')
+                })
+              axios.post('url',{name: 'kim'})
+            }}>더보기</button>
           </>
         }/>
         <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>
-        {/* <Route path='*' element={<div>없는 페이지입니다</div>}/>
-        <Route path='/about' element={<About/>}>
-          <Route path='member' element={<div>멤버임</div>}/>
-          <Route path='location' element={<About/>}/>  
-        </Route> */}
-
       </Routes>
 
     </div>
